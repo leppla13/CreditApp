@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content">
+    <h1>Заявки на кредит</h1>
+    <a href="/credits/new">Подать новую заявку</a>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Клиент</th>
+            <th>Желаемая сумма</th>
+            <th>Дата подачи</th>
+            <th>Статус</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="app : ${applications}">
+            <td th:text="${app.id}"></td>
+            <td th:text="${app.client.fullName}"></td>
+            <td th:text="${app.desiredAmount}"></td>
+            <td th:text="${app.applicationDate}"></td>
+            <td th:text="${app.status}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

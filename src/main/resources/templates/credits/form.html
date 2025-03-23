@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content">
+    <h1>Новая заявка на кредит</h1>
+    <form th:action="@{/credits}" method="post" th:object="${application}">
+        <label>
+            Клиент:
+            <select th:field="*{client}">
+                <option value="">Выберите клиента</option>
+                <option th:each="client : ${clients}" th:value="${client.id}" th:text="${client.fullName}"></option>
+            </select>
+            <span class="error" th:if="${#fields.hasErrors('client')}" th:errors="*{client}"></span>
+        </label>
+        <label>
+            Желаемая сумма:
+            <input type="number" min="10000" max="10000000" th:field="*{desiredAmount}">
+            <span class="error" th:if="${#fields.hasErrors('desiredAmount')}" th:errors="*{desiredAmount}"></span>
+        </label>
+        <button type="submit">Подать заявку</button>
+    </form>
+</div>
+</body>
+</html>

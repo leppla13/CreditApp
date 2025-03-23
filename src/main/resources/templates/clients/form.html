@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content">
+    <h1>Новый клиент</h1>
+    <form th:action="@{/clients}" method="post" th:object="${client}">
+        <label>
+            Полное имя:
+            <input type="text" th:field="*{fullName}">
+            <span class="error" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></span>
+        </label>
+        <label>
+            Паспорт (например, 1234 567890):
+            <input type="text" th:field="*{passport}">
+            <span class="error" th:if="${#fields.hasErrors('passport')}" th:errors="*{passport}"></span>
+        </label>
+        <label>
+            Пол:
+            <input type="text" th:field="*{gender}">
+            <span class="error" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></span>
+        </label>
+        <label>
+            Семейное положение:
+            <input type="text" th:field="*{maritalStatus}">
+            <span class="error" th:if="${#fields.hasErrors('maritalStatus')}" th:errors="*{maritalStatus}"></span>
+        </label>
+        <label>
+            Адрес проживания:
+            <input type="text" th:field="*{residentialAddress}">
+            <span class="error" th:if="${#fields.hasErrors('residentialAddress')}" th:errors="*{residentialAddress}"></span>
+        </label>
+        <label>
+            Адрес регистрации:
+            <input type="text" th:field="*{registrationAddress}">
+            <span class="error" th:if="${#fields.hasErrors('registrationAddress')}" th:errors="*{registrationAddress}"></span>
+        </label>
+        <label>
+            Телефон:
+            <input type="text" th:field="*{phone}">
+            <span class="error" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
+        </label>
+        <label>
+            Период работы:
+            <input type="text" th:field="*{employmentPeriod}">
+            <span class="error" th:if="${#fields.hasErrors('employmentPeriod')}" th:errors="*{employmentPeriod}"></span>
+        </label>
+        <label>
+            Должность:
+            <input type="text" th:field="*{position}">
+            <span class="error" th:if="${#fields.hasErrors('position')}" th:errors="*{position}"></span>
+        </label>
+        <label>
+            Организация:
+            <input type="text" th:field="*{organization}">
+            <span class="error" th:if="${#fields.hasErrors('organization')}" th:errors="*{organization}"></span>
+        </label>
+        <label>
+            Рейтинг кредитной истории (0-100):
+            <input type="number" min="0" max="100" th:field="*{creditHistoryRating}">
+            <span class="error" th:if="${#fields.hasErrors('creditHistoryRating')}" th:errors="*{creditHistoryRating}"></span>
+        </label>
+        <button type="submit">Сохранить</button>
+    </form>
+</div>
+</body>
+</html>

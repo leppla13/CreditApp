@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content">
+    <h1>Соглашения по кредитам</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Клиент</th>
+            <th>Желаемая сумма</th>
+            <th>Одобренная сумма</th>
+            <th>Срок (дни)</th>
+            <th>Дата подписания</th>
+            <th>Статус</th>
+            <th>Действие</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="agreement : ${agreements}">
+            <td th:text="${agreement.id}"></td>
+            <td th:text="${agreement.application.client.fullName}"></td>
+            <td th:text="${agreement.application.desiredAmount}"></td>
+            <td th:text="${agreement.approvedAmount}"></td>
+            <td th:text="${agreement.termDays}"></td>
+            <td th:text="${agreement.signingDate}"></td>
+            <td th:text="${agreement.signingStatus}"></td>
+            <td>
+                <form th:if="${agreement.signingStatus == 'not signed'}" th:action="@{/agreements/sign/{id}(id=${agreement.id})}" method="post">
+                    <button type="submit">Подписать</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
