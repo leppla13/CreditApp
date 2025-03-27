@@ -63,7 +63,6 @@
 
 **При разработке были использованы следующие технологии:**
 - Spring Boot
-- Spring Data JPA
 - Hibernate
 - H2 Database
 - Spring MVC
