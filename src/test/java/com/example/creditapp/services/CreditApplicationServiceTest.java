@@ -1,7 +1,5 @@
 package com.example.creditapp.services;
 
-import com.example.creditapp.dao.CreditAgreementRepository;
-import com.example.creditapp.dao.CreditApplicationRepository;
 import com.example.creditapp.models.Client;
 import com.example.creditapp.models.CreditApplication;
 import org.junit.jupiter.api.Test;

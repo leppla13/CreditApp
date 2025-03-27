@@ -1,6 +1,5 @@
 package com.example.creditapp;
 
-import org.hibernate.Version;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

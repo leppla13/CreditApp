@@ -1,9 +1,9 @@
 package com.example.creditapp.services;
 
+import com.example.creditapp.dao.CreditAgreementDao;
+import com.example.creditapp.dao.CreditApplicationDao;
 import com.example.creditapp.models.CreditAgreement;
 import com.example.creditapp.models.CreditApplication;
-import com.example.creditapp.dao.CreditAgreementRepository;
-import com.example.creditapp.dao.CreditApplicationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,13 +16,13 @@ import java.util.Random;
 public class CreditApplicationService {
 
     @Autowired
-    private CreditApplicationRepository creditApplicationRepository;
+    private CreditApplicationDao creditApplicationDao;
 
     @Autowired
-    private CreditAgreementRepository creditAgreementRepository;
+    private CreditAgreementDao creditAgreementDao;
 
     public List<CreditApplication> getAllApplications() {
-        return creditApplicationRepository.findAll();
+        return creditApplicationDao.getAllApplications();
     }
 
     public CreditApplication saveApplication(CreditApplication application) {
@@ -43,24 +43,24 @@ public class CreditApplicationService {
             int termDays = months * 30;
             BigDecimal approvedAmount = application.getDesiredAmount()
                     .multiply(BigDecimal.valueOf(0.5 + random.nextDouble() * 0.5));
-            application = creditApplicationRepository.save(application);
+            application = creditApplicationDao.saveApplication(application);
 
             CreditAgreement agreement = new CreditAgreement();
             agreement.setApplication(application);
             agreement.setApprovedAmount(approvedAmount);
             agreement.setTermDays(termDays);
             agreement.setSigningStatus("not signed");
-            creditAgreementRepository.save(agreement);
+            creditAgreementDao.saveAgreement(agreement);
         }
 
         else {
             application.setStatus("rejected");
-            application = creditApplicationRepository.save(application);
+            application = creditApplicationDao.saveApplication(application);
         }
         return application;
     }
 
     public List<CreditApplication> getApprovedApplications() {
-        return creditApplicationRepository.findByStatus("approved");
+        return creditApplicationDao.getApprovedApplications();
     }
 }

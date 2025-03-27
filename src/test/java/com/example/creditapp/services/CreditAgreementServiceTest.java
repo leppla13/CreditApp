@@ -1,6 +1,5 @@
 package com.example.creditapp.services;
 
-import com.example.creditapp.dao.CreditAgreementRepository;
 import com.example.creditapp.models.CreditAgreement;
 import com.example.creditapp.models.CreditApplication;
 import org.junit.jupiter.api.Test;
@@ -10,7 +9,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 

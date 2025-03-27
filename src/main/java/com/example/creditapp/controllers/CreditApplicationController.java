@@ -1,16 +1,15 @@
 package com.example.creditapp.controllers;
 
+import com.example.creditapp.models.Client;
 import com.example.creditapp.models.CreditApplication;
 import com.example.creditapp.services.ClientService;
 import com.example.creditapp.services.CreditApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Controller
@@ -49,8 +48,18 @@ public class CreditApplicationController {
     }
 
     @PostMapping
-    public String saveApplication(@ModelAttribute("application") CreditApplication application) {
+    public String saveApplication(@RequestParam("client") Long clientId, @RequestParam("desiredAmount") BigDecimal desiredAmount) {
+        Client client = clientService.getAllClients().stream()
+                .filter(c -> c.getId().equals(clientId))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Клиент не найден"));
+
+        CreditApplication application = new CreditApplication();
+        application.setClient(client);
+        application.setDesiredAmount(desiredAmount);
+
         creditApplicationService.saveApplication(application);
+
         return "redirect:/credits";
     }
 }
